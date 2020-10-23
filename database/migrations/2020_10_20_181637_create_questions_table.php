@@ -13,7 +13,7 @@ class CreateQuestionsTable extends Migration
      */
     public function up()
     {
-     if (Schema::hasTable('questions') == false) {
+    //  if (Schema::hasTable('questions')) {
         Schema::create('questions', function (Blueprint $table) {
                 $table->id();
                 $table->string('title');
@@ -31,7 +31,6 @@ class CreateQuestionsTable extends Migration
                         ->on('users')
                         ->onDelete('cascade');
             });
-        }
         
     
     }

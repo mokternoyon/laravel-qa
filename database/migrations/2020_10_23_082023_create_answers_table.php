@@ -13,16 +13,16 @@ class CreateAnswersTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('answers') == false) {
+        // if (Schema::hasTable('answers')) {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('question_id');
             $table->unsignedInteger('user_id');
             $table->text('body');
-            $table->integer(votes_count)->default(0);
+            $table->integer('votes_count')->default(0);
             $table->timestamps();
         });
-    }
+    
     }
 
     /**
