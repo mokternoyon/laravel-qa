@@ -87,12 +87,12 @@
                                     <a href="{{ $question->url}}">{{ $question->title }}</a>
                                 </h3>
                                 <div class="ml-auto">
-                                    @can('update', $question))
+                                    @can('update', $question)
                                     <a href="{{ route('questions.edit', $question->id) }}"
                                         class="btn btn-sm btn-outline-info">Edit</a>
                                     @endcan
 
-                                    @can('delete', $question))
+                                    @can('delete', $question)
                                     <form class="form-delete" method="POST"
                                         action="{{ route('questions.destroy', $question->id) }}">
                                         @method('DELETE')
