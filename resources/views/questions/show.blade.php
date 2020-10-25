@@ -35,6 +35,10 @@
     }
 
     .vote-controls .vote-accept {
+        color: rgb(17, 30, 212);
+    }
+
+    .vote-controls .vote-accepted {
         color: rgb(25, 151, 25);
     }
 </style>
@@ -113,10 +117,26 @@
                                 class="vote-down off">
                                 <i class="fa fa-caret-down fa-3x"></i>
                             </a>
-                            <a data-toggle="tooltip" data-placement="bottom" title="mark this answer as best answer"
-                                class="vote-accept {{ $answer->status  }}">
+                            @can('accept', $answer)
+
+                            <a data-toggle="tooltip" data-placement="bottom" title="Mark this answer as best answer"
+                                class="{{ $answer->status  }}"
+                                onclick="event.preventDefault(); document.getElementById('accept-answer-{{$answer->id}}').submit();">
                                 <i class="fa fa-check fa-2x"></i>
                             </a>
+                            <form id="accept-answer-{{$answer->id}}" action="{{route('answers.accept', $answer->id)}}"
+                                method="POST" style="display:none;">
+                                @csrf
+                            </form>
+                            @else
+                            @if ($answer->is_best)
+                            <a data-toggle="tooltip" data-placement="bottom"
+                                title="The question owner accepted this answer as best answer"
+                                class="vote-accepted {{ $answer->status  }}">
+                                <i class="fa fa-check fa-2x"></i>
+                            </a>
+                            @endif
+                            @endcan
                         </div>
 
                         <div class="media-body">
