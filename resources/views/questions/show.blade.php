@@ -41,6 +41,14 @@
     .vote-controls .vote-accepted {
         color: rgb(25, 151, 25);
     }
+
+    .vote-controls .favorited {
+        color: rgb(231, 231, 24);
+    }
+
+    .vote-controls .off {
+        color: gray;
+    }
 </style>
 @section('content')
 <div class="container">
@@ -66,14 +74,26 @@
                                 <i class="fa fa-caret-up fa-3x"></i>
                             </a>
                             <span class="vote-count">1230</span>
-                            <a data-toggle="tooltip" title="This question is not useful" class="vote-down off">
+                            <a data-toggle="tooltip" title="This question is not useful" class="vote-down">
                                 <i class="fa fa-caret-down fa-3x"></i>
                             </a>
                             <a data-toggle="tooltip" data-placement="bottom"
-                                title="Click to mark as favorite (Click again to undo" class="favorite">
+                                title="Click to mark as favorite (Click again to undo"
+                                class="favorite {{ Auth::guest() ? 'off': ($question->isfavorited ? 'favorited': 'off')}}"
+                                onclick="event.preventDefault(); document.getElementById('favorite-question-{{$question->id}}').submit();">
                                 <i class="fa fa-star fa-2x"></i>
                             </a>
-                            <span class="favorite-count">1230</span>
+                            <span class="favorite-count">{{ $question->favorites->count() }}</span>
+
+                            <form id="favorite-question-{{$question->id}}"
+                                action="{{ route('questions.favorite', $question->id)}}" method="POST"
+                                style="display:none;">
+                                @csrf
+                                @if ($question->is_favorited)
+                                @method('DELETE')
+
+                                @endif
+                            </form>
                         </div>
 
                         <div class="media-body">
