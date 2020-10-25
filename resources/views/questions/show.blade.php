@@ -114,7 +114,7 @@
                                 <i class="fa fa-caret-down fa-3x"></i>
                             </a>
                             <a data-toggle="tooltip" data-placement="bottom" title="mark this answer as best answer"
-                                class="vote-accept">
+                                class="vote-accept {{ $answer->status  }}">
                                 <i class="fa fa-check fa-2x"></i>
                             </a>
                         </div>
