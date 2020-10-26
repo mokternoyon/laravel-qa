@@ -1,5 +1,6 @@
 <?php
 
+use VotablesTableSeeder;
 use FavoritesTableSeeder;
 use Illuminate\Database\Seeder;
 use UserQuestionAnswersTableSeeder;
@@ -16,6 +17,7 @@ class DatabaseSeeder extends Seeder
        $this->call([
         UserQuestionAnswersTableSeeder::class,
         FavoritesTableSeeder::class,
+        VotablesTableSeeder::class,
        ]);
         
     }
